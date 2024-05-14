@@ -16,9 +16,12 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+            <div class="bg-white py-3 px-3">
+                <h4>ZIMBABWE MINISTRY OF EDUCATION SIGN LANGUAGE TO TEXT CONVERSION SYSTEM USING IMAGES</h4>
+            </div>
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <img src="{{asset('logo/education.jpg')}}" class="rounded-lg" alt="">
                 </a>
             </div>
 
