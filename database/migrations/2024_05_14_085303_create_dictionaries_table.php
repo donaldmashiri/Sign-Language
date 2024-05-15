@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dictionaries', function (Blueprint $table) {
             $table->id();
             $table->text('image_path');
-            $table->text('text');
+            $table->string('letter');
             $table->timestamps();
         });
     }

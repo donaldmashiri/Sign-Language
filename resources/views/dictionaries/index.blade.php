@@ -20,29 +20,46 @@
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                        @if($dictionaries->count() > 0)
-                            <table class="w-full text-sm text-left text-black-500 dark:text-black-400">
-                                <thead class="text-xs text-black-700 uppercase bg-gray-50 dark:bg-white-300 dark:text-black-400">
-                                <tr>
-                                    <th scope="col" class="px-2 py-2">ID  </th>
-                                    <th scope="col" class="px-2 py-2">Name</th>
-                                    <th scope="col" class="px-2 py-2">Post Count</th>
-                                    <th scope="col" class="px-2 py-2"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($dictionaries as $dictionary)
-                                    <tr class="bg-white border-b dark:bg-white-400 dark:border-gray-300">
-                                        <td class="px-2 py-1">{{$dictionary->id}}</td>
-                                        <td class="px-2 py-1">{{$dictionary->name}}</td>
-                                        <td class="px-2 py-1">{{$dictionary->text}}</td>
-                                    </tr>
+                    @if($dictionaries->count() > 0)
+                            <div class="row">
+                            @foreach ($dictionaries as $dictionary)
+                                    <div class="col-md-4">
+                                        <a href="#" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ asset($dictionary->image_path) }}" alt="">
+                                            <div class="flex flex-col justify-between p-4 leading-normal">
+                                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$dictionary->letter}}</h5>
+                                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                            @endforeach
+                            </div>
 
-                                    @include('layouts.modal')
 
-                                @endforeach
-                                </tbody>
-                            </table>
+{{--                            <table class="w-full text-sm text-left text-black-500 dark:text-black-400">--}}
+{{--                                <thead class="text-xs text-black-700 uppercase bg-gray-50 dark:bg-white-300 dark:text-black-400">--}}
+{{--                                <tr>--}}
+{{--                                    <th scope="col" class="px-2 py-2">ID </th>--}}
+{{--                                    <th scope="col" class="px-2 py-2">Letter</th>--}}
+{{--                                    <th scope="col" class="px-2 py-2">Image</th>--}}
+{{--                                    <th scope="col" class="px-2 py-2">Updated On</th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
+{{--                                @foreach ($dictionaries as $dictionary)--}}
+{{--                                    <tr class="bg-white border-b dark:bg-white-400 dark:border-gray-300">--}}
+{{--                                        <td class="px-2 py-1">{{$dictionary->id}}</td>--}}
+{{--                                        <td class="px-2 py-1">{{$dictionary->letter}}</td>--}}
+{{--                                        <td class="px-2 py-1">--}}
+{{--                                            <img src="{{ asset($dictionary->image_path) }}" width="70" alt="" srcset="">--}}
+{{--                                        </td>--}}
+{{--                                        <td class="px-2 py-1">{{$dictionary->updated_at}}</td>--}}
+{{--                                    </tr>--}}
+
+
+{{--                                @endforeach--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
                         @else
                             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-300 dark:text-gray-250" role="alert">
                                 <span class="font-medium">No Dictionaries Added!</span>

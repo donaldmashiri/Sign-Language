@@ -1,4 +1,6 @@
 <x-guest-layout>
+    <div class="card card-header mb-3 fw-bolder text-center"> <h4>Create Account</h4></div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

@@ -34,7 +34,7 @@ class DictionaryController extends Controller
             'image' => ['required', 'file', 'mimes:pdf,doc,docx'],
         ]);
 
-        $documentPath = $request->case_document->store('public/documents');
+        $documentPath = $request->image->store('public/images');
 
         $data = Dictionary::create([
             'text_description' => $request->case_description,

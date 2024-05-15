@@ -2,8 +2,8 @@
     <x-slot name="header">
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <i class="bi bi-briefcase"></i> {{ __('Update Dictionary') }}
-            <a href="{{route('dictionaries.index')}}"
+            <i class="bi bi-briefcase"></i> {{ __('Create Message') }}
+            <a href="{{route('messages.index')}}"
                class="py-2 px-4 text-white text-sm float-right font-semibold rounded-lg border border-grey-200 bg-blue-700">
                 <i class="bi bi-plus"></i>Back
             </a>
@@ -20,24 +20,43 @@
 
                     <form method="POST" action="{{ route('dictionaries.store') }}">
                         @csrf
-                        <img src="{{asset('images/A.png')}}" width="80" alt="">
+{{--                        <div class="mt-4 p-1">--}}
+{{--                            <x-input-label for="letter" :value="__('Input Text')" />--}}
+{{--                            <input type="text" name="letter" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">--}}
+{{--                            <x-input-error :messages="$errors->get('letter')" class="mt-2" />--}}
+{{--                        </div>--}}
+
 
                         <div class="mt-4 p-1">
-                            <x-input-label for="image" :value="__('Image')" />
-                            <input type="file" name="image" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                            <x-input-label for="image" :value="__('Output')" />
+                            <div class="flex">
+                                <a href=""><img  src="{{asset('images/H.png')}}" width="40" alt=""></a>
+                                <a href=""><img  src="{{asset('images/I.png')}}" width="40" alt=""></a>
+                                <a href=""><img  src="{{asset('images/E.png')}}" width="40" alt=""></a>
+                            </div>
+
+                            <h4>Hie</h4>
+
                         </div>
 
+
+
+
+
+
                         <div class="mt-4 p-1">
-                            <x-input-label for="letter" :value="__('Letter')" />
-                            <input type="text" name="letter" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                            <x-input-label for="letter" :value="__('Speech/Audio')" />
+                            <input type="file" name="letter" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             <x-input-error :messages="$errors->get('letter')" class="mt-2" />
                         </div>
+
+                        <audio src="audio_file.mp3" controls>
+                        </audio>
 
                         <div class="flex items-center justify-end mt-4">
 
                             <x-primary-button class="ml-4">
-                               Update
+                               Send
                             </x-primary-button>
                         </div>
                     </form>
