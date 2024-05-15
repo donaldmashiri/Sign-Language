@@ -12,7 +12,8 @@ class DictionaryController extends Controller
      */
     public function index()
     {
-        //
+        $dictionaries = Dictionary::all();
+        return view('dictionaries.index', compact('dictionaries'));
     }
 
     /**
@@ -20,7 +21,7 @@ class DictionaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dictionaries.create');
     }
 
     /**
@@ -28,7 +29,18 @@ class DictionaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'text_description' => ['required'],
+            'image' => ['required', 'file', 'mimes:pdf,doc,docx'],
+        ]);
+
+        $documentPath = $request->case_document->store('public/documents');
+
+        $data = Dictionary::create([
+            'text_description' => $request->case_description,
+            'image' => $documentPath,
+        ]);
+        return redirect()->back()->with('success', 'Dictionary Added Successfully.');
     }
 
     /**
