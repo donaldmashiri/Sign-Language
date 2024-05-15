@@ -13,9 +13,17 @@
         @csrf
     </form>
 
+    <p>User Type {{$user->user_type}}</p>
+
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
+
+        <div>
+            <x-input-label for="name" :value="__('User Type')" />
+            <x-text-input type="text" class="mt-1 block w-full" :value="old('name', $user->user_type)" disabled/>
+
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />

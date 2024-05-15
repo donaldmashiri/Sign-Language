@@ -5,6 +5,16 @@
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
+            <select name="user_type" class="form-group form-control mb-3" id="user_type">
+                <option value="">Select User Type</option>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+            </select>
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+
+        <div>
+            <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>

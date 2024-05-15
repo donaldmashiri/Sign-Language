@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img src="{{asset('logo/education.jpg')}}" width="70" height="70" alt="Flowbite Logo" />
                     </a>
                 </div>
 
@@ -14,6 +14,15 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link href="/profile">
+                        {{ __('Profile') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{route('dictionaries.index')}}">
+                        {{ __('Dictionaries') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{route('messages.index')}}">
+                        {{ __('Messaging') }}
                     </x-nav-link>
                 </div>
             </div>
