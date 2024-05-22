@@ -18,8 +18,9 @@
 
                     @include('layouts.partials')
 
-                    <form method="POST" action="{{ route('dictionaries.store') }}">
+                    <form action="{{ route('dictionaries.update', $dictionary) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
 
                         <div class="mt-4 p-1">
                             <x-input-label for="image" :value="__('Image')" />
@@ -36,7 +37,7 @@
                         <div class="flex items-center justify-end mt-4">
 
                             <x-primary-button class="ml-4">
-                               Update
+                                Update
                             </x-primary-button>
                         </div>
                     </form>

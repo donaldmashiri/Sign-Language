@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dictionary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DictionaryController extends Controller
 {
@@ -31,7 +32,7 @@ class DictionaryController extends Controller
     {
         $request->validate([
             'text_description' => ['required'],
-            'image' => ['required', 'file', 'mimes:pdf,doc,docx'],
+            'image' => ['required', 'file', 'mimes:png,jpeg'],
         ]);
 
         $documentPath = $request->image->store('public/images');
@@ -56,7 +57,7 @@ class DictionaryController extends Controller
      */
     public function edit(Dictionary $dictionary)
     {
-        //
+        return view('dictionaries.edit', compact('dictionary'));
     }
 
     /**
@@ -64,7 +65,30 @@ class DictionaryController extends Controller
      */
     public function update(Request $request, Dictionary $dictionary)
     {
-        //
+        $request->validate([
+            'letter' => ['required'],
+            'image' => ['required', 'mimes:png,jpeg'],
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($dictionary->image) {
+                Storage::delete($dictionary->image);
+            }
+
+            // Store the new image
+            $documentPath = $request->image->store('public/images');
+        } else {
+            // Use the existing image path
+            $documentPath = $dictionary->image;
+        }
+
+        $dictionary->update([
+            'letter' => $request->letter,
+            'image_path' => $documentPath,
+        ]);
+
+        return redirect()->back()->with('success', 'Dictionary Updated Successfully.');
     }
 
     /**
