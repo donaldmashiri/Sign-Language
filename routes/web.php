@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dictionaries', \App\Http\Controllers\DictionaryController::class);
     Route::resource('messages', \App\Http\Controllers\MessagesController::class);
+    Route::resource('audios', \App\Http\Controllers\AudioTextController::class);
 
 });
 

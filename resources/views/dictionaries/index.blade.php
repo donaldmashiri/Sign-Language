@@ -24,11 +24,11 @@
                             <div class="row">
                             @foreach ($dictionaries as $dictionary)
                                     <div class="col-md-4">
-                                        <a href="{{route('dictionaries.edit', $dictionary->id)}}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ asset($dictionary->image_path) }}" alt="">
+                                        <a href="{{route('dictionaries.edit', $dictionary->id)}}" class="flex  m-2 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <img class="object-cover w-full rounded-t-lg md:h-auto md:w-12 md:rounded-none md:rounded-s-lg" src="{{ Storage::url($dictionary->image) }}" width="40" alt="">
                                             <div class="flex flex-col justify-between p-4 leading-normal">
                                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$dictionary->letter}}</h5>
-                                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$dictionary->description}}</p>
                                             </div>
                                         </a>
                                     </div>

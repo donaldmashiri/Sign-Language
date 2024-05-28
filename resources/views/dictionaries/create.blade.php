@@ -18,11 +18,15 @@
 
                     @include('layouts.partials')
 
-                    <form method="POST" action="{{ route('dictionaries.store') }}">
+{{--                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-700 dark:text-green-400">--}}
+{{--                        <span class="font-medium">Dictionary Successfully Updated</span>--}}
+{{--                    </div>--}}
+                    <form method="POST" action="{{ route('dictionaries.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mt-4 p-1">
                             <x-input-label for="image" :value="__('Image')" />
+
                             <input type="file" name="image" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         </div>
@@ -33,10 +37,16 @@
                             <x-input-error :messages="$errors->get('letter')" class="mt-2" />
                         </div>
 
+                        <div class="mt-4 p-1">
+                            <x-input-label for="description" :value="__('Description')" />
+                            <input type="text" name="description" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
 
                             <x-primary-button class="ml-4">
-                               Update
+                               Add
                             </x-primary-button>
                         </div>
                     </form>

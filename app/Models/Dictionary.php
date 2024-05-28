@@ -12,6 +12,7 @@ class Dictionary extends Model
     protected $fillable = [
         'image',
         'letter',
+        'description',
     ];
 
 }

@@ -21,7 +21,7 @@
     <body class="font-sans text-gray-900 antialiased">
 
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
             <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="{{asset('logo/education.jpg')}}" class="h-14" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ZIMBABWE MINISTRY OF EDUCATION SIGN LANGUAGE TO TEXT CONVERSION SYSTEM USING IMAGES</span>
@@ -29,10 +29,10 @@
         </div>
     </nav>
 
-        <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div class="mt-5 p-2 flex flex-col justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <img src="{{asset('logo/sign.jpeg')}}"  class="rounded-sm" alt="">
+                    <img src="{{asset('logo/sign.jpeg')}}"  class="rounded-circle" alt="">
                 </a>
             </div>
 

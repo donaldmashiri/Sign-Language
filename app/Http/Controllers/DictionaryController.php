@@ -31,16 +31,21 @@ class DictionaryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'text_description' => ['required'],
+            'letter' => ['required'],
+            'description' => ['required'],
             'image' => ['required', 'file', 'mimes:png,jpeg'],
         ]);
 
-        $documentPath = $request->image->store('public/images');
+        $extension = $request->image->getClientOriginalExtension();
+        $imageName = $request->letter . '.' . $extension;
+        $documentPath = $request->image->storeAs('public/images', $imageName);
 
         $data = Dictionary::create([
-            'text_description' => $request->case_description,
+            'letter' => $request->letter,
+            'description' => $request->description,
             'image' => $documentPath,
         ]);
+
         return redirect()->back()->with('success', 'Dictionary Added Successfully.');
     }
 
@@ -63,30 +68,33 @@ class DictionaryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dictionary $dictionary)
+    public function update(Request $request, $id)
     {
+        $dictionary = Dictionary::findOrFail($id);
+
         $request->validate([
             'letter' => ['required'],
-            'image' => ['required', 'mimes:png,jpeg'],
+            'description' => ['required'],
+            'image' => ['nullable', 'file', 'mimes:png,jpeg'],
         ]);
 
-        if ($request->hasFile('image')) {
-            // Delete the old image if it exists
-            if ($dictionary->image) {
-                Storage::delete($dictionary->image);
-            }
+        // Update the dictionary fields
+        $dictionary->letter = $request->letter;
+        $dictionary->description = $request->description;
 
-            // Store the new image
-            $documentPath = $request->image->store('public/images');
-        } else {
-            // Use the existing image path
-            $documentPath = $dictionary->image;
+        // If a new image was uploaded, update the image_path
+        if ($request->hasFile('image')) {
+            // Delete the old image
+            Storage::delete($dictionary->image);
+
+            $extension = $request->image->getClientOriginalExtension();
+            $imageName = $request->letter . '.' . $extension;
+            $imagePath = $request->image->storeAs('public/images', $imageName);
+
+            $dictionary->image = $imagePath;
         }
 
-        $dictionary->update([
-            'letter' => $request->letter,
-            'image_path' => $documentPath,
-        ]);
+        $dictionary->save();
 
         return redirect()->back()->with('success', 'Dictionary Updated Successfully.');
     }

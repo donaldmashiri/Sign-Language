@@ -24,6 +24,9 @@
                     <x-nav-link href="{{route('messages.index')}}">
                         {{ __('Messaging') }}
                     </x-nav-link>
+                    <x-nav-link href="{{route('audios.index')}}">
+                        {{ __('Speech') }}
+                    </x-nav-link>
                 </div>
             </div>
 

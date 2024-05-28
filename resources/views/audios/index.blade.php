@@ -2,10 +2,10 @@
     <x-slot name="header">
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <i class="bi bi-briefcase"></i> {{ __('Messages') }}
+            <i class="bi bi-briefcase"></i> {{ __('Speech To Text') }}
             <a href="{{route('messages.create')}}"
                class="py-2 px-4 text-white text-sm float-right font-semibold rounded-lg border border-grey-200 bg-blue-700">
-                <i class="bi bi-plus"></i>Message
+                <i class="bi bi-plus"></i>Add Speech to Text
             </a>
         </h2>
 
@@ -18,9 +18,7 @@
 
                     @include('layouts.partials')
 
-
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
                         @if($users->count()>0)
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -40,7 +38,7 @@
                                         <td class="px-2 py-1">{{$user->email}}</td>
                                         <td class="px-2 py-1">{{$user->user_type}}</td>
                                         <td class="px-2 py-1">
-                                            <a href="{{route('messages.show', $user->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Send Message</a>
+                                            <a href="{{route('audios.show', $user->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Send audio</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -50,7 +48,6 @@
                         @else
                             <h4 class="p-2 font-semibold text-xl text-white text-center bg-red-600 leading-tight">You Users Available</h4>
                         @endif
-
                     </div>
                 </div>
             </div>

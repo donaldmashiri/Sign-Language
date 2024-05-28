@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dictionaries', function (Blueprint $table) {
+        Schema::create('audio_texts', function (Blueprint $table) {
             $table->id();
-            $table->text('image');
-            $table->text('description');
-            $table->string('letter');
+            $table->integer('receiver_id');
+            $table->integer('sender_id');
+            $table->text('message');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dictionaries');
+        Schema::dropIfExists('audio_texts');
     }
 };
