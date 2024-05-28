@@ -31,7 +31,20 @@ class AudioTextController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'audio' => 'required',
+        ]);
+
+        $audioName = $request->file('audio')->getClientOriginalName();
+        $documentPath = $request->file('audio')->store('public/audios');
+
+        $data = AudioText::create([
+            'receiver_id' => $request->receiver_id,
+            'sender_id' => Auth::user()->id,
+            'audio' => $documentPath,
+        ]);
+
+        return redirect()->back()->with('success', 'Speech Sent.');
     }
 
     /**
@@ -40,13 +53,13 @@ class AudioTextController extends Controller
     public function show(string $id)
     {
         $user = User::findorfail($id);
-        $messages = AudioText::where('receiver_id', $user->id)
+        $audios = AudioText::where('receiver_id', $user->id)
             ->where('sender_id', Auth::user()->id)
             ->orWhere('sender_id', $user->id)
             ->where('receiver_id', Auth::user()->id)
             ->orderBy('created_at', 'asc')
             ->get();
-        return view('audios.show', compact('user', 'messages'));
+        return view('audios.show', compact('user', 'audios'));
     }
 
     /**

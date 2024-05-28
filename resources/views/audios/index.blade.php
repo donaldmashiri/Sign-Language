@@ -3,10 +3,10 @@
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <i class="bi bi-briefcase"></i> {{ __('Speech To Text') }}
-            <a href="{{route('messages.create')}}"
-               class="py-2 px-4 text-white text-sm float-right font-semibold rounded-lg border border-grey-200 bg-blue-700">
-                <i class="bi bi-plus"></i>Add Speech to Text
-            </a>
+{{--            <a href="{{route('messages.create')}}"--}}
+{{--               class="py-2 px-4 text-white text-sm float-right font-semibold rounded-lg border border-grey-200 bg-blue-700">--}}
+{{--                <i class="bi bi-plus"></i>Add Speech to Text--}}
+{{--            </a>--}}
         </h2>
 
     </x-slot>

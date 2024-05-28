@@ -44,23 +44,50 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="chat-box">
-{{--                                    @foreach($messages as $message)--}}
-{{--                                        @if($message->user_id == Auth::user()->id)--}}
-{{--                                            <div class="message right-message bg-secondary p-3">--}}
-{{--                                                <p>{{ $message->message }}</p>--}}
-{{--                                                <span class="message-info">{{ $message->created_at }}</span>--}}
-{{--                                            </div>--}}
-{{--                                        @else--}}
-{{--                                        @endif--}}
-{{--                                    @endforeach--}}
-
                                     <div class="chat-container">
-                                        @foreach($messages as $msg)
-                                            <div class="chat-message {{ $msg->sender_id == Auth::user()->id ? 'user' : 'assistant' }}">
-                                                <strong>{{ $msg->sender_id == Auth::user()->id ? 'Me:' : 'Other:' }}</strong> {{ $msg->message }}
-                                            </div>
-                                        @endforeach
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              @foreach($messages as $msg)
+                                                  <div class="chat-message {{ $msg->sender_id == Auth::user()->id ? 'user' : 'assistant' }}">
+                                                      <strong>{{ $msg->sender_id == Auth::user()->id ? 'Me:' : 'Other:' }}</strong> {{ $msg->message }}
+                                                      @if (!$msg->dictionaries->isEmpty())
+                                                          <div class="dictionary-letters">
+                                                              @foreach($msg->dictionaries as $dictionary)
+                                                                  <span>{{ $dictionary->letter }}</span>
+                                                              @endforeach
+                                                          </div>
+                                                      @endif
+                                                  </div>
+                                              @endforeach
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="grid gap-4">
+                                                  <div class="grid grid-cols-5 gap-4">
+                                                      @foreach($messages as $msg)
+                                                          <div class="chat-message {{ $msg->sender_id == Auth::user()->id ? 'user' : 'assistant' }}">
+                                                              @if (!$msg->dictionaries->isEmpty())
+                                                                  <div class="dictionary-letters">
+                                                                      @foreach($msg->dictionaries as $dictionary)
+                                                                          <div class="row">
+                                                                              <img class="h-auto max-w-full rounded-sm" width="20" src="{{ Storage::url($dictionary->image) }}" alt="">
+                                                                          </div>
+                                                                      @endforeach
+                                                                  </div>
+                                                              @endif
+                                                          </div>
+                                                      @endforeach
+
+
+                                                  </div>
+                                              </div>
+
+                                          </div>
+                                      </div>
                                     </div>
+
+
+
+
 
                                 </div>
                             </div>

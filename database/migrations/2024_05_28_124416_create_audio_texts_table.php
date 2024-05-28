@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('receiver_id');
             $table->integer('sender_id');
-            $table->text('message');
+            $table->text('audio');
             $table->timestamps();
         });
     }

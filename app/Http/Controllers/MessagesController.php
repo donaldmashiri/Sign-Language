@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dictionary;
 use App\Models\Messages;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -51,12 +52,31 @@ class MessagesController extends Controller
     public function show(string $id)
     {
         $user = User::findorfail($id);
-        $messages = Messages::where('receiver_id', $user->id)
-            ->where('sender_id', Auth::user()->id)
-            ->orWhere('sender_id', $user->id)
-            ->where('receiver_id', Auth::user()->id)
+//        $messages = Messages::where('receiver_id', $user->id)
+//            ->where('sender_id', Auth::user()->id)
+//            ->orWhere('sender_id', $user->id)
+//            ->where('receiver_id', Auth::user()->id)
+//            ->orderBy('created_at', 'asc')
+//            ->get();
+
+        $messages = Messages::where(function ($query) use ($user) {
+            $query->where('receiver_id', $user->id)
+                ->where('sender_id', auth()->user()->id);
+        })->orWhere(function ($query) use ($user) {
+            $query->where('sender_id', $user->id)
+                ->where('receiver_id', auth()->user()->id);
+        })
             ->orderBy('created_at', 'asc')
             ->get();
+
+        foreach ($messages as $message) {
+//            $message->content = "ais"; // Set the message content to "hi"
+            $message->dictionaries = Dictionary::whereRaw("UPPER(SUBSTRING(letter, 1, 1)) = ? OR UPPER(SUBSTRING(letter, 2, 1)) = ?", [strtoupper(substr($message->message, 0, 1)), strtoupper(substr($message->message, 1, 1))])
+                ->get();
+        }
+
+
+
         return view('messages.show', compact('user', 'messages'));
     }
 
