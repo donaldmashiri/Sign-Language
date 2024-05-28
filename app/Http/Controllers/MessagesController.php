@@ -69,15 +69,35 @@ class MessagesController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        foreach ($messages as $message) {
-//            $message->content = "ais"; // Set the message content to "hi"
-            $message->dictionaries = Dictionary::whereRaw("UPPER(SUBSTRING(letter, 1, 1)) = ? OR UPPER(SUBSTRING(letter, 2, 1)) = ?", [strtoupper(substr($message->message, 0, 1)), strtoupper(substr($message->message, 1, 1))])
-                ->get();
+//        foreach ($messages as $message) {
+////            $message->content = "ais"; // Set the message content to "hi"
+//            $message->dictionaries = Dictionary::whereRaw("UPPER(SUBSTRING(letter, 1, 1)) = ? OR UPPER(SUBSTRING(letter, 2, 1)) = ?", [strtoupper(substr($message->message, 0, 1)), strtoupper(substr($message->message, 1, 1))])
+//                ->get();
+//        }
+
+        $allResults = [];
+
+// Loop through each message
+        foreach ($messages as $mes) {
+            $msg = $mes->message;
+
+            // Split the message into an array of letters
+            $lettersArray = str_split($msg);
+
+            // Retrieve data from Dictionary where 'letter' is in $lettersArray
+            $results = Dictionary::whereIn('letter', $lettersArray)->get();
+
+            // Merge the results into the allResults array
+            foreach ($results as $result) {
+                $allResults[$msg][] = $result; // Group results by message
+            }
         }
 
 
 
-        return view('messages.show', compact('user', 'messages'));
+
+
+        return view('messages.show', compact('user', 'messages', 'allResults'));
     }
 
     /**
