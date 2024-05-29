@@ -47,39 +47,44 @@
                                     <div class="chat-container">
                                       <div class="row">
                                           <div class="col-md-6">
-{{--                                              @foreach($messages as $msg)--}}
-{{--                                                  <div class="chat-message {{ $msg->sender_id == Auth::user()->id ? 'user' : 'assistant' }}">--}}
-{{--                                                      <strong>{{ $msg->sender_id == Auth::user()->id ? 'Me:' : 'Other:' }}</strong> {{ $msg->message }}--}}
-{{--                                                      @if (!$msg->dictionaries->isEmpty())--}}
-{{--                                                          <div class="dictionary-letters">--}}
-{{--                                                              @foreach($msg->dictionaries as $dictionary)--}}
-{{--                                                                  <span>{{ $dictionary->letter }}</span>--}}
-{{--                                                              @endforeach--}}
-{{--                                                          </div>--}}
-{{--                                                      @endif--}}
-{{--                                                  </div>--}}
-{{--                                              @endforeach--}}
+                                              @foreach($messages as $msg)
+                                                  <div class="chat-message {{ $msg->sender_id == Auth::user()->id ? 'user' : 'assistant' }}">
+                                                      <strong>{{ $msg->sender_id == Auth::user()->id ? 'Me:' : 'Other:' }}</strong> {{ $msg->message }}
+                                                  </div>
+                                              @endforeach
                                           </div>
                                           <div class="col-md-6">
                                               <div class="grid gap-4">
                                                   <div class="grid grid-cols-5 gap-4">
-{{--                                                      @foreach($messages as $msg)--}}
-{{--                                                          <div class="chat-message {{ $msg->sender_id == Auth::user()->id ? 'user' : 'assistant' }}">--}}
-{{--                                                              @if (!$msg->dictionaries->isEmpty())--}}
-{{--                                                                  <div class="dictionary-letters">--}}
-{{--                                                                      @foreach($msg->dictionaries as $dictionary)--}}
-{{--                                                                          <div class="row">--}}
-{{--                                                                              <img class="h-auto max-w-full rounded-sm" width="20" src="{{ Storage::url($dictionary->image) }}" alt="">--}}
-{{--                                                                          </div>--}}
-{{--                                                                      @endforeach--}}
-{{--                                                                  </div>--}}
-{{--                                                              @endif--}}
-{{--                                                          </div>--}}
-{{--                                                      @endforeach--}}
+                                                      @foreach($messages as $msg)
+                                                              @if(isset($allResults[$msg->message]))
+                                                                  @foreach($allResults[$msg->message] as $result)
+                                                      <div>
+                                                          <img class="h-auto max-w-full rounded-lg" src="{{ Storage::url($result->image) }}" alt="">
+                                                      </div>
+                                                              @endforeach
+                                                          @endif
+                                                  @endforeach
+{{--                                                      <div>--}}
+{{--                                                          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">--}}
+{{--                                                      </div>--}}
+{{--                                                      <div>--}}
+{{--                                                          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">--}}
+{{--                                                      </div>--}}
+{{--                                                      <div>--}}
+{{--                                                          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">--}}
+{{--                                                      </div>--}}
+{{--                                                      <div>--}}
+{{--                                                          <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">--}}
+{{--                                                      </div>--}}
+                                                  </div>
+                                              </div>
 
+
+                                              <div class="grid gap-4">
+                                                  <div class="grid grid-cols-5 gap-4">
                                                           @foreach($messages as $msg)
                                                               <div>
-{{--                                                                  <p>{{ $msg->message }}</p>--}}
                                                                   @if(isset($allResults[$msg->message]))
                                                                       @foreach($allResults[$msg->message] as $result)
                                                                           {{$result->letter}}
@@ -87,8 +92,6 @@
                                                                   @endif
                                                               </div>
                                                           @endforeach
-
-
                                                   </div>
                                               </div>
 

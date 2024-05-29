@@ -34,12 +34,12 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/6_gXiBe9y9A" frameborder="0" allowfullscreen></iframe>
 
     <div class="max-w-sm mt-3 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <h4 class="mb-3 font-normal text-gray-700 dark:text-gray-400">Login As.</h4>
+        <h4 class="mb-3 font-normal text-gray-700 dark:text-gray-400">User Access.</h4>
         <a href="/login" class="btn btn-primary">
-          Teacher
+          Login
         </a>
-        <a href="/login" class="btn btn-danger">
-           Student
+        <a href="/register" class="btn btn-danger">
+           Register
         </a>
     </div>
 </div>
