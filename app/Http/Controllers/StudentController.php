@@ -30,12 +30,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required|string|max:255|min:5',
+            'email' => 'required|string|email|max:255|min:5|unique:users',
             'date_of_birth' => 'required|date|before:' . \Carbon\Carbon::now()->subYears(18)->format('Y-m-d'),
             'gender' => 'required|string|in:male,female',
-            'address' => 'required|string|max:255',
-            'phone' => 'required|numeric',
+            'address' => 'required|string|max:255|min:5',
+            'phone' => 'required|numeric|min:5',
             'password' => 'required|string|min:8|confirmed',
         ]);
 

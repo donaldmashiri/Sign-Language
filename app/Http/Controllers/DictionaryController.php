@@ -32,7 +32,7 @@ class DictionaryController extends Controller
     {
         $request->validate([
             'letter' => ['required'],
-            'description' => ['required'],
+            'description' => ['required', 'min:5'],
             'image' => ['required', 'file', 'mimes:png,jpeg'],
         ]);
 
