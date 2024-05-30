@@ -37,7 +37,7 @@ class DictionaryController extends Controller
         ]);
 
         $extension = $request->image->getClientOriginalExtension();
-        $imageName = $request->letter . '.' . $extension;
+        $imageName = $request->letter . '.' . 'png';
         $documentPath = $request->image->storeAs('public/images', $imageName);
 
         $data = Dictionary::create([

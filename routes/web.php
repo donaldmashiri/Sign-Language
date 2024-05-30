@@ -18,10 +18,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dictionaries', \App\Http\Controllers\DictionaryController::class);
     Route::resource('messages', \App\Http\Controllers\MessagesController::class);
+    Route::resource('reports', \App\Http\Controllers\ReportController::class);
     Route::resource('audio-texts', \App\Http\Controllers\AudioTextController::class);
+
 
     Route::post('/messages/createFromImages', [\App\Http\Controllers\MessagesController::class, 'createFromImages'])->name('messages.createFromImages');
 
 });
+
+Route::resource('students', \App\Http\Controllers\StudentController::class);
 
 require __DIR__.'/auth.php';

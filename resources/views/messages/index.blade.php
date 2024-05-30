@@ -21,37 +21,89 @@
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                        @if($users->count()>0)
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-2 py-1">#</th>
-                                    <th scope="col" class="px-2 py-1">Names</th>
-                                    <th scope="col" class="px-2 py-1">Email</th>
-                                    <th scope="col" class="px-2 py-1">User Type</th>
-                                    <th scope="col" class="px-2 py-1"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($users as $user)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td class="px-2 py-1">{{$user->id}}</td>
-                                        <td class="px-2 py-1">{{$user->name}}</td>
-                                        <td class="px-2 py-1">{{$user->email}}</td>
-                                        <td class="px-2 py-1">{{$user->user_type}}</td>
-                                        <td class="px-2 py-1">
-                                            <a href="{{route('messages.show', $user->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Send Message</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                        @if (auth()->user()->user_type == 'teacher')
+                            <form action="{{route('messages.store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="p-6 text-gray-900">
+                                    <div class="row">
+                                        <div class="col-md-10">
+{{--                                            <input type="hidden" name="receiver_id" value="{{$user->id}}">--}}
+                                            <div class="p-2">
+                                                <x-input-label for="message" :value="__('Enter Pre-inputted Text')" />
+                                                <x-text-input id="message"  class="block mt-1 w-full" type="text" name="message" :value="old('message')" />
+                                                <x-input-error :messages="$errors->get('message')" class="mt-2" />
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                </tbody>
-                            </table>
+                                    <div class="flex items-center mt-2">
+                                        <x-primary-button class="ml-4">
+                                            {{'Send'}}
+                                        </x-primary-button>
+                                    </div>
+
+                                </div>
+                            </form>
                         @else
-                            <h4 class="p-2 font-semibold text-xl text-white text-center bg-red-600 leading-tight">You Users Available</h4>
+                            <form action="{{ route('messages.createFromImages') }}" method="POST">
+                                @csrf
+                                <div class="image-selection container">
+                                    @foreach ($dictionary as $entry)
+                                        <label>
+                                            <input type="checkbox" name="images[]" value="{{ $entry->letter }}">
+{{--                                            <img src="{{ asset('storage/' . $entry->image) }}" alt="{{ $entry->letter }}" style="width: 50px; height: 50px;">--}}
+                                            <img src="{{ Storage::url($entry->image) }}" alt="{{ $entry->letter }}" style="width: 50px; height: 50px;">
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <button type="submit" class="btn btn-primary m-4 float-right">Send</button>
+                            </form>
                         @endif
 
                     </div>
+
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                @foreach ($messages as $message)
+                                    <div class="d-flex align-items-start mb-3 border border-r-amber-100 p-3">
+                                        <div class="me-2">
+                                            @if ($message->user->user_type == 'teacher')
+                                                <img src="{{ asset('logo/teacher.png') }}" alt="User Avatar" class="rounded-circle" style="width: 30px; height: 30px;">
+                                            @else
+                                                <img src="{{ asset('logo/student.jpg') }}" alt="User Avatar" class="rounded-circle" style="width: 30px; height: 30px;">
+                                            @endif
+
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">
+                                                @if ($message->sender_id == auth()->user()->id)
+                                                    Me
+                                                @else
+                                                    {{ $message->user->name }}
+                                                @endif
+                                            </div>
+                                            <div>
+                                                @if (auth()->user()->user_type == 'teacher')
+                                                    {{ $message->message }}
+                                                @else
+                                                    <div class="message-images d-flex flex-wrap" style="gap: 10px;">
+                                                        @if (isset($allResults[$message->id]))
+                                                            @foreach ($allResults[$message->id] as $image)
+                                                                <img src="{{ Storage::url($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="text-muted" style="font-size: 0.8rem;">{{ $message->created_at->format('d M Y, h:i A') }}</div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

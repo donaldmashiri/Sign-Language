@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 
-class MessagesController extends Controller
+class MessagesControllerCopy extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,28 +16,7 @@ class MessagesController extends Controller
     public function index()
     {
         $users = User::all();
-        $messages = Messages::orderBy('id', 'DESC')->get();
-        $allResults = [];
-
-        foreach ($messages as $mes) {
-            $msg = $mes->message;
-            $lettersArray = str_split($msg);
-
-            $results = Dictionary::whereIn('letter', $lettersArray)->get()->keyBy('letter');
-
-            $images = [];
-            foreach ($lettersArray as $letter) {
-                $letterUpper = strtoupper($letter);
-                if (isset($results[$letterUpper])) {
-                    $images[] = $results[$letterUpper]->image;
-                }
-            }
-
-            $allResults[$mes->id] = $images;
-        }
-
-        $dictionary = Dictionary::all();
-        return view('messages.index', compact('users', 'dictionary', 'messages', 'allResults'));
+        return view('messages.index', compact('users'));
     }
 
     /**
@@ -58,8 +37,8 @@ class MessagesController extends Controller
         ]);
 
         $messaging = Messages::create([
-//            'receiver_id' => $request->receiver_id,
-            'user_id' => Auth::user()->id,
+            'receiver_id' => $request->receiver_id,
+            'sender_id' => Auth::user()->id,
             'message' => $request->input('message'),
         ]);
 
@@ -79,12 +58,12 @@ class MessagesController extends Controller
 
         // Save the message to the database
         $messaging = Messages::create([
-//            'receiver_id' => $request->receiver_id,
-            'user_id' => Auth::user()->id,
+            'receiver_id' => $request->receiver_id,
+            'sender_id' => Auth::user()->id,
             'message' => $message,
         ]);
 
-        return back()->with('success', 'Message Sent');
+        return back()->with('success', 'Message Created from Images');
     }
 
     /**
