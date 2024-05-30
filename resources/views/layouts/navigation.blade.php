@@ -19,7 +19,7 @@
 {{--                        {{ __('Profile') }}--}}
 {{--                    </x-nav-link>--}}
                     <x-nav-link href="{{route('dictionaries.index')}}">
-                        {{ __('Dictionaries') }}
+                        {{ __('Dictionary') }}
                     </x-nav-link>
                     <x-nav-link href="{{route('messages.index')}}">
                         {{ __('Messaging') }}
