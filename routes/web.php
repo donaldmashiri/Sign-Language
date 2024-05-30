@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('messages', \App\Http\Controllers\MessagesController::class);
     Route::resource('audios', \App\Http\Controllers\AudioTextController::class);
 
+    Route::post('/messages/createFromImages', [\App\Http\Controllers\MessagesController::class, 'createFromImages'])->name('messages.createFromImages');
+
 });
 
 require __DIR__.'/auth.php';
