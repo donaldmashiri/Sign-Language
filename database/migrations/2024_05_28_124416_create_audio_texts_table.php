@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('receiver_id');
             $table->integer('sender_id');
             $table->text('audio');
+            $table->text('transcription');
             $table->timestamps();
         });
     }

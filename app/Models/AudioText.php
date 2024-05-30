@@ -13,5 +13,6 @@ class AudioText extends Model
         'receiver_id',
         'sender_id',
         'audio',
+        'transcription',
     ];
 }

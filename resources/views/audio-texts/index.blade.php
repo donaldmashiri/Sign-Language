@@ -38,7 +38,7 @@
                                         <td class="px-2 py-1">{{$user->email}}</td>
                                         <td class="px-2 py-1">{{$user->user_type}}</td>
                                         <td class="px-2 py-1">
-                                            <a href="{{route('audios.show', $user->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Send audio</a>
+                                            <a href="{{route('audio-texts.show', $user->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Send audio</a>
                                         </td>
                                     </tr>
                                 @endforeach

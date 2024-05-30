@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dictionaries', \App\Http\Controllers\DictionaryController::class);
     Route::resource('messages', \App\Http\Controllers\MessagesController::class);
-    Route::resource('audios', \App\Http\Controllers\AudioTextController::class);
+    Route::resource('audio-texts', \App\Http\Controllers\AudioTextController::class);
 
     Route::post('/messages/createFromImages', [\App\Http\Controllers\MessagesController::class, 'createFromImages'])->name('messages.createFromImages');
 
