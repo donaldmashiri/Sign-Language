@@ -52,7 +52,8 @@
                                         <label>
                                             <input type="checkbox" name="images[]" value="{{ $entry->letter }}">
 {{--                                            <img src="{{ asset('storage/' . $entry->image) }}" alt="{{ $entry->letter }}" style="width: 50px; height: 50px;">--}}
-                                            <img src="{{ Storage::url($entry->image) }}" alt="{{ $entry->letter }}" style="width: 50px; height: 50px;">
+{{--                                            <img src="{{ Storage::url($entry->image) }}" alt="{{ $entry->letter }}" style="width: 50px; height: 50px;">--}}
+                                            <img src="{{ asset($entry->image) }}" alt="{{ $entry->letter }}" style="width: 50px; height: 50px;">
                                         </label>
                                     @endforeach
                                 </div>
@@ -90,7 +91,8 @@
                                                     <div class="message-images d-flex flex-wrap" style="gap: 10px;">
                                                         @if (isset($allResults[$message->id]))
                                                             @foreach ($allResults[$message->id] as $image)
-                                                                <img src="{{ Storage::url($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">
+{{--                                                                <img src="{{ Storage::url($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">--}}
+                                                                <img src="{{ asset($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">
                                                             @endforeach
                                                         @endif
                                                     </div>

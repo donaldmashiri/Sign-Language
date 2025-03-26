@@ -152,7 +152,8 @@
                                                         <div class="message-images d-flex flex-wrap" style="gap: 10px;">
                                                             @if (isset($allResults[$audio->id]))
                                                                 @foreach ($allResults[$audio->id] as $image)
-                                                                    <img src="{{ Storage::url($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">
+{{--                                                                    <img src="{{ Storage::url($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">--}}
+                                                                    <img src="{{ asset($image) }}" alt="Sign Image" style="width: 50px; height: 50px;">
                                                                 @endforeach
                                                             @endif
                                                         </div>
